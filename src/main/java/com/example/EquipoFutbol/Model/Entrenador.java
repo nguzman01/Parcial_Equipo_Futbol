@@ -1,52 +1,54 @@
 package com.example.EquipoFutbol.Model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
-@Getter
+
+/*@Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+@AllArgsConstructor*/
+
 @Entity
 public class Entrenador {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    private int id_entrenador;
+    private Long id_entrenador;
     private String nombreEntrenador;
     private String especialidad;
-    private int id_equipo;
+
 
     //
+    @ManyToOne
+    @JoinColumn(name = "id_equipo")
+    private Equipo equipo;
+
+    // contructor
 
 
     public Entrenador() {
     }
 
-    public Entrenador(int id_entrenador, String nombreEntrenador, String especialidad, int id_equipo) {
+    public Entrenador(Long id_entrenador, String nombreEntrenador, String especialidad, Equipo equipo) {
         this.id_entrenador = id_entrenador;
         this.nombreEntrenador = nombreEntrenador;
         this.especialidad = especialidad;
-        this.id_equipo = id_equipo;
+        this.equipo = equipo;
     }
 
-    // seter y geter
+    // geter y serter
 
-
-    public int getId_entrenador() {
+    public Long getId_entrenador() {
         return id_entrenador;
     }
 
-    public void setId_entrenador(int id_entrenador) {
+    public void setId_entrenador(Long id_entrenador) {
         this.id_entrenador = id_entrenador;
     }
 
@@ -66,11 +68,11 @@ public class Entrenador {
         this.especialidad = especialidad;
     }
 
-    public int getId_equipo() {
-        return id_equipo;
+    public Equipo getEquipo() {
+        return equipo;
     }
 
-    public void setId_equipo(int id_equipo) {
-        this.id_equipo = id_equipo;
+    public void setEquipo(Equipo equipo) {
+        this.equipo = equipo;
     }
 }

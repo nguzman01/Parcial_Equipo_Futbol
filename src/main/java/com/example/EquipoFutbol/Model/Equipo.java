@@ -2,50 +2,58 @@ package com.example.EquipoFutbol.Model;
 //import java.time.localDate;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
-@Getter
+/*@Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+@AllArgsConstructor*/
 @Entity
 public class Equipo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
- private int id_equipo;
- private String nombreEquipo;
- private String ciudad;
- private Date fundacion;
+     private Long id_equipo;
+     private String nombreEquipo;
+     private String ciudad;
+     private Date fundacion;
+
+    @OneToMany(mappedBy = "equipo", cascade = CascadeType.ALL)
+    private List<Jugador> jugadores;
+
+    @OneToMany(mappedBy = "equipo", cascade = CascadeType.ALL)
+    private List<Entrenador> entrenadores;
+
+    //
 
     public Equipo() {
     }
 
-    public Equipo(int id_equipo, String nombreEquipo, String ciudad, Date fundacion) {
+    public Equipo(Long id_equipo, String nombreEquipo, String ciudad, Date fundacion, List<Jugador> jugadores, List<Entrenador> entrenadores) {
         this.id_equipo = id_equipo;
         this.nombreEquipo = nombreEquipo;
         this.ciudad = ciudad;
         this.fundacion = fundacion;
+        this.jugadores = jugadores;
+        this.entrenadores = entrenadores;
     }
 
-    // geter
+    // geter y seter
 
 
-    public int getId_equipo() {
+    public Long getId_equipo() {
         return id_equipo;
     }
 
-    public void setId_equipo(int id_equipo) {
+    public void setId_equipo(Long id_equipo) {
         this.id_equipo = id_equipo;
     }
 
@@ -71,5 +79,21 @@ public class Equipo {
 
     public void setFundacion(Date fundacion) {
         this.fundacion = fundacion;
+    }
+
+    public List<Jugador> getJugadores() {
+        return jugadores;
+    }
+
+    public void setJugadores(List<Jugador> jugadores) {
+        this.jugadores = jugadores;
+    }
+
+    public List<Entrenador> getEntrenadores() {
+        return entrenadores;
+    }
+
+    public void setEntrenadores(List<Entrenador> entrenadores) {
+        this.entrenadores = entrenadores;
     }
 }

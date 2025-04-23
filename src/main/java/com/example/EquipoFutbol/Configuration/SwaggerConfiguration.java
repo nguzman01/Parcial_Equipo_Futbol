@@ -13,7 +13,7 @@ public class SwaggerConfiguration {
     public OpenAPI customOpenAPI(){
         return new OpenAPI()
                 .info(new Info()
-                        .title("API Supabase")
+                        .title("API Equipo de Futbol")
                         .version("1.0")
                         .description("Documentacion de la API para gestionar BD ren Supabase")
                         .contact(new Contact()
